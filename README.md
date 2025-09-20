@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-# Bank Withdrawal Assessment
+
+# Bank Service Assessment
 
 ## Overview
 This C# ASP.NET Core project that improves a bank withdrawal operation by applying clean architecture, dependency injection, and event-driven design using AWS SNS.
@@ -35,6 +35,4 @@ This implementation preserves the original business functionality while improvin
 - Tracks what happen — events and logs help monitor and audit activity
 - Can run in different environments — flexible and cost-aware design
 
-=======
-# assessment-project
->>>>>>> 14ad211230e576235b73a6a724d7c10ebb80d849
+
