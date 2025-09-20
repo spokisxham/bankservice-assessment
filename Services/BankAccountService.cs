@@ -24,7 +24,6 @@ namespace BankAccountService.Services
 
         /// <summary>
         /// Handles the withdrawal logic.
-        /// Uses a transaction to ensure atomicity of the balance check and update.
         /// </summary>
         public async Task<string> WithdrawAsync(long accountId, decimal amount)
         {
@@ -39,8 +38,7 @@ namespace BankAccountService.Services
                 await _dbConnection.OpenAsync();
                 using (var transaction = _dbConnection.BeginTransaction(IsolationLevel.Serializable))
                 {
-                    // Use a stored procedure or a more robust ORM for data access in a real application.
-                    // This is an improvement, but a stored procedure would be a further step.
+
                     string sqlCheckBalance = "SELECT balance FROM accounts WITH (UPDLOCK) WHERE id = @id";
                     using (var cmdCheck = new SqlCommand(sqlCheckBalance, (SqlConnection)_dbConnection, (SqlTransaction)transaction))
                     {
@@ -83,7 +81,6 @@ namespace BankAccountService.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred during withdrawal for account {AccountId}", accountId);
-                // This rollback is a safety net for unexpected errors within the try block
                 return "Withdrawal failed due to system error";
             }
             finally
