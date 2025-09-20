@@ -1,15 +1,17 @@
 ﻿using BankAccountService.Contracts;
 using Newtonsoft.Json;
+using Amazon.SimpleNotificationService;
+using Amazon.SimpleNotificationService.Model;
 
 namespace BankAccountService.Services
 {
  
     public class SnsEventPublisher : IEventPublisher
     {
-        private readonly SnsClient _snsClient;
+        private readonly IAmazonSimpleNotificationService _snsClient;
         private readonly ILogger<SnsEventPublisher> _logger;
 
-        public SnsEventPublisher(SnsClient snsClient, ILogger<SnsEventPublisher> logger)
+        public SnsEventPublisher(IAmazonSimpleNotificationService snsClient, ILogger<SnsEventPublisher> logger)
         {
             _snsClient = snsClient;
             _logger = logger;
